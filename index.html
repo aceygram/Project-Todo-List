@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List by Ace</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/Component 1.png" alt="">
+        </div>
+        <div class="btn-container">
+            <button>Log in</button>
+        </div>
+    </header>
+    <div class="main-section">
+        <div class="menu" id="menu">
+            <div class="menu-top">
+                <div>
+                    <p><svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>home</title><path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" /></svg>Menu</p>
+                    <div class="hamurger-layer" id="menu-button">
+                        <svg class="hamburger" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>menu</title><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>
+                    </div>
+                </div>
+                <div class="search-container">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>magnify</title><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+                    <input type="text" class="search-input" placeholder="Search..."/>
+                </div>
+            </div>
+            <div class="menu-middle">
+                <button id="addProject">Add Project +</button>
+                <!-- <p class="selected-menu"><svg class="menu-icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>briefcase</title><path d="M10,2H14A2,2 0 0,1 16,4V6H20A2,2 0 0,1 22,8V19A2,2 0 0,1 20,21H4C2.89,21 2,20.1 2,19V8C2,6.89 2.89,6 4,6H8V4C8,2.89 8.89,2 10,2M14,6V4H10V6H14Z" /></svg>Project 1</p> -->
+            </div>
+            <div class="menu-bottom">
+                <p><svg class="menu-icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>cogs</title><path d="M15.9,18.45C17.25,18.45 18.35,17.35 18.35,16C18.35,14.65 17.25,13.55 15.9,13.55C14.54,13.55 13.45,14.65 13.45,16C13.45,17.35 14.54,18.45 15.9,18.45M21.1,16.68L22.58,17.84C22.71,17.95 22.75,18.13 22.66,18.29L21.26,20.71C21.17,20.86 21,20.92 20.83,20.86L19.09,20.16C18.73,20.44 18.33,20.67 17.91,20.85L17.64,22.7C17.62,22.87 17.47,23 17.3,23H14.5C14.32,23 14.18,22.87 14.15,22.7L13.89,20.85C13.46,20.67 13.07,20.44 12.71,20.16L10.96,20.86C10.81,20.92 10.62,20.86 10.54,20.71L9.14,18.29C9.05,18.13 9.09,17.95 9.22,17.84L10.7,16.68L10.65,16L10.7,15.31L9.22,14.16C9.09,14.05 9.05,13.86 9.14,13.71L10.54,11.29C10.62,11.13 10.81,11.07 10.96,11.13L12.71,11.84C13.07,11.56 13.46,11.32 13.89,11.15L14.15,9.29C14.18,9.13 14.32,9 14.5,9H17.3C17.47,9 17.62,9.13 17.64,9.29L17.91,11.15C18.33,11.32 18.73,11.56 19.09,11.84L20.83,11.13C21,11.07 21.17,11.13 21.26,11.29L22.66,13.71C22.75,13.86 22.71,14.05 22.58,14.16L21.1,15.31L21.15,16L21.1,16.68M6.69,8.07C7.56,8.07 8.26,7.37 8.26,6.5C8.26,5.63 7.56,4.92 6.69,4.92A1.58,1.58 0 0,0 5.11,6.5C5.11,7.37 5.82,8.07 6.69,8.07M10.03,6.94L11,7.68C11.07,7.75 11.09,7.87 11.03,7.97L10.13,9.53C10.08,9.63 9.96,9.67 9.86,9.63L8.74,9.18L8,9.62L7.81,10.81C7.79,10.92 7.7,11 7.59,11H5.79C5.67,11 5.58,10.92 5.56,10.81L5.4,9.62L4.64,9.18L3.5,9.63C3.41,9.67 3.3,9.63 3.24,9.53L2.34,7.97C2.28,7.87 2.31,7.75 2.39,7.68L3.34,6.94L3.31,6.5L3.34,6.06L2.39,5.32C2.31,5.25 2.28,5.13 2.34,5.03L3.24,3.47C3.3,3.37 3.41,3.33 3.5,3.37L4.63,3.82L5.4,3.38L5.56,2.19C5.58,2.08 5.67,2 5.79,2H7.59C7.7,2 7.79,2.08 7.81,2.19L8,3.38L8.74,3.82L9.86,3.37C9.96,3.33 10.08,3.37 10.13,3.47L11.03,5.03C11.09,5.13 11.07,5.25 11,5.32L10.03,6.06L10.06,6.5L10.03,6.94Z" /></svg>Settings</p>
+                <p><svg class="menu-icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>login</title><path d="M11 7L9.6 8.4L12.2 11H2V13H12.2L9.6 15.6L11 17L16 12L11 7M20 19H12V21H20C21.1 21 22 20.1 22 19V5C22 3.9 21.1 3 20 3H12V5H20V19Z" /></svg>Sign in</p>
+            </div>
+        </div>
+        <div class="todo-canvas">
+            <p class="todo-header"></p>
+            <!-- <div class="todo-lists">
+                <div class="todo-list">
+                    <label for="checkbox">
+                        <input type="checkbox" id="checkbox">
+                        <span class="custom-checkbox"></span>
+                    </label>
+                    <div class="todo-content">
+                        <p class="todo-title">Buy Groceries</p>
+                        <div>
+                            <p class="todo-description">Milk, eggs, and bread</p>
+                            <p class="todo-date">2023-11-01</p>
+                            <div class="todo-priority">High</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="todo-list">
+                    <label for="checkbox2">
+                        <input type="checkbox" id="checkbox2">
+                        <span class="custom-checkbox"></span>
+                    </label>
+                    <div class="todo-content">
+                        <p class="todo-title">Finish homework</p>
+                        <div>
+                            <p class="todo-description">Math assignment</p>
+                            <p class="todo-date">2023-10-30</p>
+                            <div class="todo-priority">Medium</div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+
+            <!-- add todo-list form -->
+            <div id="addBookModal" class="form-hide">
+
+            </div>
+            <form action="" id="addBookForm" class="form">
+                <svg class="close form-hide" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24 ">
+                  <title>close-circle</title>
+                  <path
+                    d="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z"
+                  />
+                </svg>
+                <h3>Add Todo</h3>
+                <label for="title">
+                  <input type="text" id="title" placeholder="Title" />
+                </label>
+                <label for="author">
+                  <input type="text" id="description" placeholder="Description" />
+                </label>
+                <label for="year">
+                  <input type="number" id="date" placeholder="YYYY-MM-DD" />
+                </label>
+                <label for="pages">
+                  <input type="number" id="priority" placeholder="Priority" />
+                </label>
+                <button type="submit" class="submit">Submit</button>
+              </form>
+
+        </div>
+    </div>
+    <!-- <button id="addProject">Add Project</button> -->
+    <script src="main.js"></script>
+</body>
+</html>
