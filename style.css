@@ -65,6 +65,7 @@ header button:hover {
     /* border-right: 2px solid black; */
     height: 87vh;
     color: #999;
+    fill: #999;
     box-shadow: 5px 0px 15px -4px rgba(0,0,0,0.1);
     transition: 1s;
 }
@@ -121,7 +122,7 @@ header button:hover {
   
 .search-input {
     margin-top: 20px;
-    padding: 15px 35px;
+    padding: 15px 35px 17px;
     width: 200px;
     height: 30px;
     border: 2px solid #999;
@@ -129,6 +130,10 @@ header button:hover {
 }
 
 .menu-middle {
+    flex: 1;
+}
+
+.side-menu {
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -137,11 +142,8 @@ header button:hover {
 
 .menu-middle p,
 .menu-bottom p {
-    font-size: 16px;
-    color: #999;
     display: flex;
     gap: 10px;
-    fill: #999;
 }
 
 .menu-middle .selected-menu {
@@ -149,7 +151,7 @@ header button:hover {
     fill: #616161;
 }
 
-.menu-middle button {
+.addButton {
     padding: 10px 20px;
     margin: 20px 20px;
     background: none;
@@ -160,10 +162,18 @@ header button:hover {
     cursor: pointer;
 }
 
-.menu-middle button:hover {
+.addButton:hover {
     background-color: rgb(0, 110, 0);
     color: white;
     transform: scale(1.2);
+}
+
+.project-input {
+    padding: 15px 15px 17px;
+    width: 200px;
+    height: 30px;
+    border: 2px solid #999;
+    border-radius: 20px;
 }
 
 .menu-bottom {
@@ -178,6 +188,11 @@ header button:hover {
   position: relative;
 }
 
+.todo-top {
+    display: flex;
+    justify-content: space-between;
+}
+
 .todo-header {
     font-size: 30px;
     color: #616161;
@@ -185,7 +200,7 @@ header button:hover {
     display: flex;
     align-items: center;
     gap: 20px;
-    padding: 5px 0 0 50px;
+    padding: 5px 0 10px 50px;
 }
 
 .todo-header svg {
@@ -205,6 +220,7 @@ header button:hover {
     flex-direction: column;
     gap: 10px;
     color: #999;
+    width: 400px;
 }
 
 .todo-title {
@@ -225,6 +241,8 @@ header button:hover {
 .todo-date {
     width: 150px;
 }
+
+.todo-date{}
 
 input[type="checkbox"] {
     display: none;
@@ -277,6 +295,8 @@ input[type="checkbox"]:checked + .custom-checkbox {
   /* justify-content: end; */
   transition: 1s;
   padding-top: 84px;
+  display: grid;
+  place-items: center;
 }
 
 .form-hide {
@@ -355,3 +375,179 @@ form svg {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+
+.selected-folder{
+    color: #616161;
+    fill: #616161;
+    position: relative;
+}
+
+.selected-folder::before {
+    content: '\2713'; /* Checkmark Unicode character */
+    font-size: 25px;
+    color: #27ae60; /* Green color */
+    position: absolute;
+    top: 0px;
+    left: 100px;
+}
+
+.project-folders {
+    width: 150px;
+    display: flex;
+    align-items: center;
+}
+
+.project-folders span{
+    width: 100%;
+}
+
+.project-folders:hover {
+    color: #616161;
+    cursor: pointer;
+}
+
+.warning {
+    font-size: 12px;
+    color: red; /* Green color */
+}
+
+.todo-content > div:first-child {
+    display: flex;
+    justify-content: space-between;
+}
+
+.todo-content > div + div > p + p + p  {
+    text-align: end;
+    width: 50px;
+}
+
+.todo-content svg{
+    transform: scale(0.8);
+    fill: #999;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.todo-content svg:hover{
+    transform: scale(1);
+    fill: #616161;
+}
+
+.svg-delete {
+    height: 25px;
+}
+
+.delete-book {
+  background-color: white;
+  width: 300px;
+  text-align: center;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+}
+
+.delete-book div {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 1.5rem;
+}
+
+.delete-book div button {
+  padding: 3px 10px 5px 10px;
+  background-color: rgb(102, 212, 102);
+  color: white;
+  border: 2px solid rgb(102, 212, 102);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 1s;
+}
+
+.delete-book div button + button {
+  border: 2px solid rgb(207, 86, 86);
+  background-color: rgb(207, 86, 86);
+}
+
+.delete-book div button:hover {
+  background-color: white;
+  color: rgb(102, 212, 102);
+}
+
+.delete-book div button + button:hover {
+  background-color: white;
+  color: rgb(207, 86, 86);
+}
+
+@media only screen and (max-width: 990px) {
+    .todo-header {
+        font-size: 25px;
+        color: #616161;
+        fill: #616161;
+        display: flex;
+        gap: 10px;
+        padding: 5px 0 10px 0px;
+    }
+
+    .addButton {
+        padding: 10px 20px;
+        margin: 10px 20px;
+        background: none;
+        border: none;
+        color: rgb(0, 110, 0);
+        border-radius: 50px;
+        transition: 1s;
+        cursor: pointer;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        padding: 10px 20px;
+        box-shadow: 0 0 20px 7px rgba(0,0,0,.1);
+        z-index: 1000;
+        background-color: white;
+    }
+}
+
+@media only screen and (max-width: 990px) {
+    .todo-header {
+        font-size: 15px;
+        color: #616161;
+        fill: #616161;
+        display: flex;
+        gap: 10px;
+        padding: 5px 0 10px 0px;
+    }
+
+    .addButton {
+        padding: 10px 20px;
+        margin: 10px 10px;
+        background: none;
+        border: none;
+        color: rgb(0, 110, 0);
+        border-radius: 50px;
+        transition: 1s;
+        cursor: pointer;
+    }
+
+    .addButton:hover {
+        transform: none;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        padding: 10px 20px;
+        box-shadow: 0 0 20px 7px rgba(0,0,0,.1);
+        z-index: 1000;
+        background-color: white;
+    }
+}
