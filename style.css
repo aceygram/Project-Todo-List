@@ -37,6 +37,7 @@ header button {
     border-image-slice: 1;
     overflow: hidden;
     background: linear-gradient(45.34deg, #0DD3FF 20%, #1149D8 40%, #8B00AE 65%, #EA0EFD 80%);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     transition: 1s;
@@ -45,6 +46,7 @@ header button {
 
 header button:hover {
     background: linear-gradient(45.34deg, #0DD3FF 20%, #1149D8 40%, #8B00AE 65%, #EA0EFD 80%);
+    background-clip: none;
     -webkit-background-clip: none;
     -webkit-text-fill-color: white;
 }
@@ -63,7 +65,7 @@ header button:hover {
     left: 0;
     padding: 15px 20px;
     /* border-right: 2px solid black; */
-    height: 87vh;
+    height: 92vh;
     color: #999;
     fill: #999;
     box-shadow: 5px 0px 15px -4px rgba(0,0,0,0.1);
@@ -186,6 +188,7 @@ header button:hover {
   margin: 100px 0 0 320px;
   transition: 1s;
   position: relative;
+  overflow-y: hidden;
 }
 
 .todo-top {
@@ -201,10 +204,14 @@ header button:hover {
     align-items: center;
     gap: 20px;
     padding: 5px 0 10px 50px;
+    font-weight: bold;
 }
 
 .todo-header svg {
     height: 30px;
+}
+
+.todo-lists {
 }
 
 .todo-list {
@@ -213,6 +220,7 @@ header button:hover {
     padding: 20px 0 20px;
     align-items: flex-start;
     border-bottom: 1px solid #99999969;
+
 }
 
 .todo-content {
@@ -241,8 +249,6 @@ header button:hover {
 .todo-date {
     width: 150px;
 }
-
-.todo-date{}
 
 input[type="checkbox"] {
     display: none;
@@ -372,6 +378,7 @@ form svg {
     filter: contrast(90%);
     background-color: white;
     background: linear-gradient(45.34deg, #0DD3FF 20%, #1149D8 40%, #8B00AE 65%, #EA0EFD 80%);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -479,58 +486,27 @@ form svg {
 @media only screen and (max-width: 990px) {
     .todo-header {
         font-size: 25px;
-        color: #616161;
-        fill: #616161;
-        display: flex;
         gap: 10px;
         padding: 5px 0 10px 0px;
     }
 
     .addButton {
-        padding: 10px 20px;
         margin: 10px 20px;
-        background: none;
-        border: none;
-        color: rgb(0, 110, 0);
-        border-radius: 50px;
-        transition: 1s;
-        cursor: pointer;
     }
 
     header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: fixed;
-        left: 0;
-        right: 0;
-        top: 0;
         padding: 10px 20px;
-        box-shadow: 0 0 20px 7px rgba(0,0,0,.1);
-        z-index: 1000;
-        background-color: white;
     }
 }
 
-@media only screen and (max-width: 990px) {
+@media only screen and (max-width: 800px) {
     .todo-header {
         font-size: 15px;
-        color: #616161;
-        fill: #616161;
-        display: flex;
         gap: 10px;
-        padding: 5px 0 10px 0px;
     }
 
     .addButton {
-        padding: 10px 20px;
-        margin: 10px 10px;
-        background: none;
-        border: none;
-        color: rgb(0, 110, 0);
-        border-radius: 50px;
-        transition: 1s;
-        cursor: pointer;
+        padding: 10px 15px;
     }
 
     .addButton:hover {
@@ -538,16 +514,96 @@ form svg {
     }
 
     header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: fixed;
-        left: 0;
-        right: 0;
-        top: 0;
         padding: 10px 20px;
-        box-shadow: 0 0 20px 7px rgba(0,0,0,.1);
-        z-index: 1000;
-        background-color: white;
+    }
+
+    .todo-header svg {
+        height: 25px;
+    }
+}
+
+@media only screen and (max-width: 560px) {
+    .todo-list {
+        padding: 20px 0px 20px 3px;
+        margin-right: 20px;
+    }
+
+    .todo-description {
+        width: 150px;
+    }
+
+    .todo-date {
+        width: 80px;
+    }
+
+    .todo-content > div:first-child {
+        width: 285px;
+    }
+
+    #addTodo {
+        font-size: 15px;
+    }
+
+    .todo-header {
+        gap: 7px;
+    }
+
+    .addButton {
+        margin: 10px 10px 15px;
+    }
+
+    header img {
+        height: 40px;
+    }
+
+    body {
+        margin-top: 0px;
+    }
+
+    .menu {
+        top: 64px;
+        padding: 15px 15px;
+    }
+
+    .hamburger {
+        width: 25px;
+    }
+
+    header button {
+        padding: 4px 15px;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    
+    .custom-checkbox {
+        display: inline-block;
+        position: relative;
+        width: 20px;
+        height: 20px;
+        border-radius: 4px;
+        border: 2px solid red;
+        cursor: pointer;
+    }
+
+    .todo-title {
+        font-size: 15px;
+        color: #616161;
+    }
+
+    .todo-description {
+        width: 130px;
+    }
+
+    .todo-content div {
+        font-size: 10px;
+    }
+
+    .todo-date {
+        width: 55px;
+    }
+
+    .todo-content > div:first-child {
+        width: 240px;
     }
 }
