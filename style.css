@@ -539,17 +539,14 @@ form svg {
     .todo-content > div:first-child {
         width: 285px;
     }
-
-    #addTodo {
-        font-size: 15px;
-    }
-
+    
     .todo-header {
         gap: 7px;
     }
 
     .addButton {
         margin: 10px 10px 15px;
+        font-size: 15px;
     }
 
     header img {
@@ -569,9 +566,16 @@ form svg {
         width: 25px;
     }
 
-    header button {
-        padding: 4px 15px;
+
+    form svg {
+        right: 355px;
+        top: 8px;
     }
+
+    .form {
+        top: 64px;
+    }
+
 }
 
 @media only screen and (max-width: 420px) {
@@ -605,5 +609,9 @@ form svg {
 
     .todo-content > div:first-child {
         width: 240px;
+    }
+
+    .todo-list {
+        gap: 10px;
     }
 }
