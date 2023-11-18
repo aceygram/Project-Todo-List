@@ -2,14 +2,82 @@ const menuButton = document.getElementById('menu-button');
 const menu = document.getElementById('menu');
 const todoCanvas = document.querySelector('.todo-canvas');
 
+const todoTop = document.querySelector('.todo-top');
+const addTodo = document.getElementById('addTodo');
+
+
+// Function to check the viewport width and apply styles
+function applyStylesBasedOnWidth() {
+  const viewportWidth = window.innerWidth;
+
+  if (viewportWidth < 560) {
+    menu.style.left = '-235px';
+    todoCanvas.style.margin = '70px 0 0 80px';
+    addTodo.textContent = 'Add +'
+  } else if (viewportWidth < 800){
+    menu.style.left = '-220px';
+    todoCanvas.style.margin = '100px 0 0 100px';
+  } else {
+    // Apply styles for larger screens
+    menu.style.left = '0';
+    todoCanvas.style.margin = '100px 0 0 320px';
+  }
+}
+
+// Attach the function to the window resize event
+window.addEventListener('resize', applyStylesBasedOnWidth);
+
+// Call the function on page load
+applyStylesBasedOnWidth();
+
 menuButton.addEventListener('click', () => {
-  if (menu.style.left === '-220px') {
+  const viewportWidth = window.innerWidth;
+
+  if (viewportWidth < 560) {
+    if (menu.style.left === '-235px') {
+      todoTop.style.width = '440px'
+      menu.style.left = '0';
+      todoCanvas.style.margin = '70px 0 0 320px';
+    } else {
+      menu.style.left = '-235px';
+      todoCanvas.style.margin = '70px 0 0 80px';
+      
+  
+      setTimeout(() => {
+        todoTop.style.width = '100%'
+      }, 1000);
+    }    
+  } else if (viewportWidth < 800) {
+    if (menu.style.left === '-220px') {
+      todoTop.style.width = '695px'
       menu.style.left = '0';
       todoCanvas.style.margin = '100px 0 0 320px';
-  } else {
+    } else {
       menu.style.left = '-220px';
       todoCanvas.style.margin = '100px 0 0 100px';
+      
+
+      setTimeout(() => {
+        todoTop.style.width = '100%'
+      }, 1000);
+    }
+  } else {
+    if (menu.style.left === '-220px') {
+      menu.style.left = '0';
+      todoCanvas.style.margin = '100px 0 0 320px';
+    } else {
+      menu.style.left = '-220px';
+      todoCanvas.style.margin = '100px 0 0 100px';
+      
+
+      setTimeout(() => {
+        todoTop.style.width = '100%'
+      }, 1000);
+    }
   }
+  
+
+
 });
 
 // Step 1: Individual Todo Part Creation
@@ -255,23 +323,7 @@ function renderProjectTodo(todo, i) {
   });
 }
 
-// Initial rendering of project1
-(function appendProject1() {
-  const projectDefault = projectFolder.getTodoLists()[0]; // Assuming project1 is the first one in the list
 
-  const todoHeader = document.querySelector('.todo-header');
-  const svg = '<svg class="menu-icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>briefcase</title><path d="M10,2H14A2,2 0 0,1 16,4V6H20A2,2 0 0,1 22,8V19A2,2 0 0,1 20,21H4C2.89,21 2,20.1 2,19V8C2,6.89 2.89,6 4,6H8V4C8,2.89 8.89,2 10,2M14,6V4H10V6H14Z" /></svg>'
-
-  todoHeader.innerHTML = `${svg} Todo list for ${projectDefault.title}`;
-
-
-  projectDefault.todos.forEach((todo, i) => {
-    renderProjectTodo(todo, i);
-  });
-})();
-
-
-const addTodo = document.getElementById('addTodo');
 
 addTodo.addEventListener('click', () => {
   activatePopup.showPopup();
@@ -416,7 +468,7 @@ addProjectButton.addEventListener('click', () => {
 function updateMiddleMenu() {
   const titles = projectFolder.getProjectTitles();
   const svg = '<svg class="menu-icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>briefcase</title><path d="M10,2H14A2,2 0 0,1 16,4V6H20A2,2 0 0,1 22,8V19A2,2 0 0,1 20,21H4C2.89,21 2,20.1 2,19V8C2,6.89 2.89,6 4,6H8V4C8,2.89 8.89,2 10,2M14,6V4H10V6H14Z" /></svg>';
-  const svgDelete = '<svg class="svg-delete" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>trash-can</title><path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z" /></svg>'
+  const svgDelete = '<svg class="svg-delete" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>trash-can</title><path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z" /></svg>';
   sideMenu.innerHTML = ' ';
 
   let selectedProjectIndex = 0; // Keep track of the selected project index
@@ -523,8 +575,10 @@ function updateMiddleMenu() {
       }
     });
   });
-}
 
+  // Automatically select the last project in the list
+  selectProjectFolder();
+}
 
 // Initial rendering of project titles
 updateMiddleMenu();
