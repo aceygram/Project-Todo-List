@@ -21,6 +21,10 @@ function applyStylesBasedOnWidth() {
     menu.style.left = '-235px';
     todoCanvas.style.margin = '70px 0 0 80px';
     addTodo.textContent = 'Add +'
+
+    setTimeout(() => {
+      todoTop.style.width = '100%'
+    }, 1000);
   }
 }
 
