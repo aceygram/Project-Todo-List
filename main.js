@@ -441,7 +441,6 @@ addProjectButton.addEventListener('click', () => {
 
     
     // Add an event listener to the input element for both 'focusout' and 'keydown' events
-    inputElement.addEventListener('focusout', handleInput);
     inputElement.addEventListener('keydown', handleKeydown);
 
     // Append the input element to the middle menu
@@ -632,7 +631,6 @@ function selectProjectFolder() {
 // Common logic function
 function handleInput() {
   // Remove the event listeners before handling the input
-  inputElement.removeEventListener('focusout', handleInput);
   inputElement.removeEventListener('keydown', handleKeydown);
 
   const projectName = capitalizeFirstLetter(inputElement.value.trim());
@@ -685,7 +683,6 @@ function handleInput() {
     isInputVisible = false; // Reset the flag
   }
   // Reattach event listeners after removing the warning
-  inputElement.addEventListener('focusout', handleInput);
   inputElement.addEventListener('keydown', handleKeydown);
 }
 
