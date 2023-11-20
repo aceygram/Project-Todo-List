@@ -5,23 +5,22 @@ const todoCanvas = document.querySelector('.todo-canvas');
 const todoTop = document.querySelector('.todo-top');
 const addTodo = document.getElementById('addTodo');
 
-
 // Function to check the viewport width and apply styles
 function applyStylesBasedOnWidth() {
   const viewportWidth = window.innerWidth;
 
-  if (viewportWidth < 560) {
-    todoTop.style.width = '100%'
-    menu.style.left = '-235px';
-    todoCanvas.style.margin = '70px 0 0 80px';
-    addTodo.textContent = 'Add +'
-  } else if (viewportWidth < 800){
-    menu.style.left = '-220px';
-    todoCanvas.style.margin = '100px 0 0 100px';
-  } else if (viewportWidth < 1500) {
+   if (viewportWidth > 800) {
     // Apply styles for larger screens
     menu.style.left = '0';
     todoCanvas.style.margin = '100px 0 0 320px';
+  } else if (viewportWidth > 560) {
+    todoTop.style.width = '100%'
+    menu.style.left = '-235px';
+    todoCanvas.style.margin = '90px 0 0 90px';
+  } else if (viewportWidth > 0) {
+    menu.style.left = '-235px';
+    todoCanvas.style.margin = '70px 0 0 80px';
+    addTodo.textContent = 'Add +'
   }
 }
 
@@ -34,7 +33,7 @@ applyStylesBasedOnWidth();
 todoCanvas.addEventListener('click', () => {
   const viewportWidth = window.innerWidth;
   
-  if (viewportWidth < 560) {
+  if (viewportWidth > 0 && viewportWidth < 560) {
     menu.style.left = '-235px';
     todoCanvas.style.margin = '70px 0 0 80px';
   
@@ -47,7 +46,33 @@ todoCanvas.addEventListener('click', () => {
 menuButton.addEventListener('click', () => {
   const viewportWidth = window.innerWidth;
 
-  if (viewportWidth < 560) {
+  if (viewportWidth > 800) {
+      if (menu.style.left === '-220px') {
+        menu.style.left = '0';
+        todoCanvas.style.margin = '100px 0 0 320px';
+      } else {
+        menu.style.left = '-220px';
+        todoCanvas.style.margin = '100px 0 0 100px';
+        
+        setTimeout(() => {
+          todoTop.style.width = '100%'
+        }, 1000);
+      }
+  } else if  (viewportWidth > 560) {
+    if (menu.style.left === '-235px') {
+      todoTop.style.width = '695px'
+      menu.style.left = '0';
+      todoCanvas.style.margin = '90px 0 0 320px';
+    } else {
+      menu.style.left = '-235px';
+      todoCanvas.style.margin = '90px 0 0 90px';
+      
+
+      setTimeout(() => {
+        todoTop.style.width = '100%'
+      }, 1000);
+    }
+  } else if (viewportWidth > 0) {
     if (menu.style.left === '-235px') {
       todoTop.style.width = '440px'
       menu.style.left = '0';
@@ -61,35 +86,7 @@ menuButton.addEventListener('click', () => {
         todoTop.style.width = '100%'
       }, 1000);
     }    
-  } else if (viewportWidth < 800) {
-    if (menu.style.left === '-220px') {
-      todoTop.style.width = '695px'
-      menu.style.left = '0';
-      todoCanvas.style.margin = '100px 0 0 320px';
-    } else {
-      menu.style.left = '-220px';
-      todoCanvas.style.margin = '100px 0 0 100px';
-      
-
-      setTimeout(() => {
-        todoTop.style.width = '100%'
-      }, 1000);
-    }
-  } else {
-    if (menu.style.left === '-220px') {
-      menu.style.left = '0';
-      todoCanvas.style.margin = '100px 0 0 320px';
-    } else {
-      menu.style.left = '-220px';
-      todoCanvas.style.margin = '100px 0 0 100px';
-      
-
-      setTimeout(() => {
-        todoTop.style.width = '100%'
-      }, 1000);
-    }
-  }
-  
+  } 
 
 
 });
