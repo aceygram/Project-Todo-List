@@ -11,6 +11,7 @@ function applyStylesBasedOnWidth() {
   const viewportWidth = window.innerWidth;
 
   if (viewportWidth < 560) {
+    todoTop.style.width = '100%'
     menu.style.left = '-235px';
     todoCanvas.style.margin = '70px 0 0 80px';
     addTodo.textContent = 'Add +'
@@ -29,6 +30,19 @@ window.addEventListener('resize', applyStylesBasedOnWidth);
 
 // Call the function on page load
 applyStylesBasedOnWidth();
+
+todoCanvas.addEventListener('click', () => {
+  const viewportWidth = window.innerWidth;
+  
+  if (viewportWidth < 560) {
+    menu.style.left = '-235px';
+    todoCanvas.style.margin = '70px 0 0 80px';
+  
+    setTimeout(() => {
+      todoTop.style.width = '100%'
+    }, 1000);
+  }
+});
 
 menuButton.addEventListener('click', () => {
   const viewportWidth = window.innerWidth;
@@ -413,49 +427,21 @@ const sideMenu = document.querySelector('.side-menu');
 const addProjectButton = document.getElementById('addProject');
 let isInputVisible = false;
 let warningDisplayed = false; // Flag to track whether the warning message has been displayed
+let inputElement;
 
 // Add a click event listener to the "Add Project" button
 addProjectButton.addEventListener('click', () => {
   if (!isInputVisible) {
     // Create an input element to collect the project name
-    const inputElement = document.createElement('input');
+    inputElement = document.createElement('input');
     inputElement.type = 'text';
     inputElement.placeholder = 'Enter project name';
     inputElement.classList.add('project-input');
 
     
-    // Add a keydown event listener to the input element
-    inputElement.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter') {
-        const projectName = capitalizeFirstLetter(inputElement.value.trim());
-        if (projectName.length >= 11) {
-          if (!warningDisplayed){
-            const p = document.createElement('p');
-            p.textContent = "Your project name should not be more than 10 characters!"
-            p.classList.add('warning');
-            sideMenu.appendChild(p);
-            warningDisplayed = true; // Set the flag to true
-          }
-        } else {
-          // Create a new project and add it to the project folder
-          const newProject = createTodoList(projectName);
-          projectFolder.addTodoList(newProject);
-
-          // Clear the input element
-          inputElement.value = '';
-
-          // Remove the input element after adding the project
-          inputElement.remove();
-
-          updateMiddleMenu();
-
-          selectProjectFolder();
-
-          isInputVisible = false; // Reset the flag
-          warningDisplayed = false; // Set the flag to true
-        }
-      }
-    });
+    // Add an event listener to the input element for both 'focusout' and 'keydown' events
+    inputElement.addEventListener('focusout', handleInput);
+    inputElement.addEventListener('keydown', handleKeydown);
 
     // Append the input element to the middle menu
     sideMenu.appendChild(inputElement);
@@ -508,6 +494,8 @@ function updateMiddleMenu() {
       t.todos.forEach((todo, i) => {
         renderProjectTodo(todo, i);
       });
+
+      applyStylesBasedOnWidth();
     });
 
     // Add a click event listener for deleting a project folder
@@ -639,3 +627,71 @@ function selectProjectFolder() {
     projectFolders[newProjectIndex].click(); // Simulate a click event on the new project folder
   }
 }
+
+// Common logic function
+function handleInput() {
+  // Remove the event listeners before handling the input
+  inputElement.removeEventListener('focusout', handleInput);
+  inputElement.removeEventListener('keydown', handleKeydown);
+
+  const projectName = capitalizeFirstLetter(inputElement.value.trim());
+
+  if (projectName.length >= 11) {
+    if (!warningDisplayed) {
+      const p = document.createElement('p');
+      p.textContent = "Your project name should not be more than 10 characters!";
+      p.classList.add('warning');
+      sideMenu.appendChild(p);
+      warningDisplayed = true; // Set the flag to true
+
+      // Delay the removal of the warning message after 5 seconds
+      setTimeout(() => {
+        if (warningDisplayed) {
+          const warningMessage = sideMenu.querySelector('.warning');
+          if (warningMessage) {
+            warningMessage.remove();
+          }
+          warningDisplayed = false;
+        }
+
+        // Reattach event listeners after showing the warning
+        attachEventListeners();
+      }, 3000);
+    }
+  } else {
+    // Reset the warningDisplayed flag when the input is valid
+    if (warningDisplayed) {
+      const warningMessage = sideMenu.querySelector('.warning');
+      if (warningMessage) {
+        warningMessage.remove();
+      }
+      warningDisplayed = false;
+    }
+
+    // Create a new project and add it to the project folder
+    const newProject = createTodoList(projectName);
+    projectFolder.addTodoList(newProject);
+
+    // Clear the input element
+    inputElement.value = '';
+
+    updateMiddleMenu();
+
+    selectProjectFolder();
+
+    applyStylesBasedOnWidth();
+
+    isInputVisible = false; // Reset the flag
+  }
+  // Reattach event listeners after removing the warning
+  inputElement.addEventListener('focusout', handleInput);
+  inputElement.addEventListener('keydown', handleKeydown);
+}
+
+function handleKeydown(event) {
+  if (event.key === 'Enter') {
+    handleInput();
+    console.log("it's working");
+  }
+}
+
