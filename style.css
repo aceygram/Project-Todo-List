@@ -520,6 +520,14 @@ form svg {
     .todo-header svg {
         height: 25px;
     }
+
+    .menu {
+        padding: 15px 15px;
+    }
+
+    .hamburger {
+        width: 25px;
+    }
 }
 
 @media only screen and (max-width: 560px) {
@@ -562,9 +570,7 @@ form svg {
         padding: 15px 15px;
     }
 
-    .hamburger {
-        width: 25px;
-    }
+
 
 
     form svg {
