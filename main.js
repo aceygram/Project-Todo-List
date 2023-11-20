@@ -34,18 +34,6 @@ window.addEventListener('resize', applyStylesBasedOnWidth);
 // Call the function on page load
 applyStylesBasedOnWidth();
 
-todoCanvas.addEventListener('click', () => {
-  const viewportWidth = window.innerWidth;
-  
-  if (viewportWidth > 0 && viewportWidth < 560) {
-    menu.style.left = '-235px';
-    todoCanvas.style.margin = '70px 0 0 80px';
-  
-    setTimeout(() => {
-      todoTop.style.width = '100%'
-    }, 1000);
-  }
-});
 
 menuButton.addEventListener('click', () => {
   const viewportWidth = window.innerWidth;
