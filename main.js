@@ -18,7 +18,7 @@ function applyStylesBasedOnWidth() {
   } else if (viewportWidth < 800){
     menu.style.left = '-220px';
     todoCanvas.style.margin = '100px 0 0 100px';
-  } else {
+  } else if (viewportWidth < 1500) {
     // Apply styles for larger screens
     menu.style.left = '0';
     todoCanvas.style.margin = '100px 0 0 320px';
