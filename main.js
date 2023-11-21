@@ -483,7 +483,6 @@ function updateMiddleMenu() {
         renderProjectTodo(todo, i);
       });
 
-      applyStylesBasedOnWidth();
     });
 
     // Add a click event listener for deleting a project folder
