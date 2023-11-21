@@ -9,15 +9,17 @@ const addTodo = document.getElementById('addTodo');
 function applyStylesBasedOnWidth() {
   const viewportWidth = window.innerWidth;
 
-   if (viewportWidth > 800) {
-    // Apply styles for larger screens
+  if (viewportWidth > 800 && document.activeElement.tagName !== 'INPUT') {
+    // Apply styles for larger screens only if not focused on an input field
     menu.style.left = '0';
     todoCanvas.style.margin = '100px 0 0 320px';
-  } else if (viewportWidth > 560) {
+  } else if (viewportWidth > 560 && document.activeElement.tagName !== 'INPUT') {
+    // Apply styles for medium screens only if not focused on an input field
     todoTop.style.width = '100%'
     menu.style.left = '-235px';
     todoCanvas.style.margin = '90px 0 0 90px';
-  } else if (viewportWidth > 0) {
+  } else if (viewportWidth > 0 && document.activeElement.tagName !== 'INPUT') {
+    // Apply styles for small screens only if not focused on an input field
     menu.style.left = '-235px';
     todoCanvas.style.margin = '70px 0 0 80px';
     addTodo.textContent = 'Add +'
@@ -28,8 +30,14 @@ function applyStylesBasedOnWidth() {
   }
 }
 
-// Attach the function to the window resize event
-window.addEventListener('resize', applyStylesBasedOnWidth);
+let resizeTimer;
+
+window.addEventListener('resize', function() {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(function() {
+    applyStylesBasedOnWidth();
+  }, 250); // Adjust the delay as needed
+});
 
 // Call the function on page load
 applyStylesBasedOnWidth();
@@ -429,10 +437,6 @@ addProjectButton.addEventListener('click', () => {
 
     
     // Add an event listener to the input element for both 'focusout' and 'keydown' events
-    inputElement.addEventListener('touchstart', (e) => {
-      e.preventDefault();
-    });
-
     inputElement.addEventListener('keydown', handleKeydown);
 
     // Append the input element to the middle menu
