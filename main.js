@@ -9,17 +9,15 @@ const addTodo = document.getElementById('addTodo');
 function applyStylesBasedOnWidth() {
   const viewportWidth = window.innerWidth;
 
-  if (viewportWidth > 800 && document.activeElement.tagName !== 'INPUT') {
-    // Apply styles for larger screens only if not focused on an input field
+   if (viewportWidth > 800) {
+    // Apply styles for larger screens
     menu.style.left = '0';
     todoCanvas.style.margin = '100px 0 0 320px';
-  } else if (viewportWidth > 560 && document.activeElement.tagName !== 'INPUT') {
-    // Apply styles for medium screens only if not focused on an input field
+  } else if (viewportWidth > 560) {
     todoTop.style.width = '100%'
     menu.style.left = '-235px';
     todoCanvas.style.margin = '90px 0 0 90px';
-  } else if (viewportWidth > 0 && document.activeElement.tagName !== 'INPUT') {
-    // Apply styles for small screens only if not focused on an input field
+  } else if (viewportWidth > 0) {
     menu.style.left = '-235px';
     todoCanvas.style.margin = '70px 0 0 80px';
     addTodo.textContent = 'Add +'
@@ -30,18 +28,24 @@ function applyStylesBasedOnWidth() {
   }
 }
 
-let resizeTimer;
-
-window.addEventListener('resize', function() {
-  clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(function() {
-    applyStylesBasedOnWidth();
-  }, 250); // Adjust the delay as needed
-});
+// Attach the function to the window resize event
+window.addEventListener('resize', applyStylesBasedOnWidth);
 
 // Call the function on page load
 applyStylesBasedOnWidth();
 
+todoCanvas.addEventListener('click', () => {
+  const viewportWidth = window.innerWidth;
+  
+  if (viewportWidth > 0 && viewportWidth < 560) {
+    menu.style.left = '-235px';
+    todoCanvas.style.margin = '70px 0 0 80px';
+  
+    setTimeout(() => {
+      todoTop.style.width = '100%'
+    }, 1000);
+  }
+});
 
 menuButton.addEventListener('click', () => {
   const viewportWidth = window.innerWidth;
@@ -437,10 +441,12 @@ addProjectButton.addEventListener('click', () => {
 
     
     // Add an event listener to the input element for both 'focusout' and 'keydown' events
+    inputElement.addEventListener('focusout', handleInput);
     inputElement.addEventListener('keydown', handleKeydown);
 
     // Append the input element to the middle menu
     sideMenu.appendChild(inputElement);
+    inputElement.focus();
     isInputVisible = true; // Set the flag to indicate that the input is visibley
   }
 });
@@ -490,6 +496,7 @@ function updateMiddleMenu() {
         renderProjectTodo(todo, i);
       });
 
+      applyStylesBasedOnWidth();
     });
 
     // Add a click event listener for deleting a project folder
@@ -625,6 +632,7 @@ function selectProjectFolder() {
 // Common logic function
 function handleInput() {
   // Remove the event listeners before handling the input
+  inputElement.removeEventListener('focusout', handleInput);
   inputElement.removeEventListener('keydown', handleKeydown);
 
   const projectName = capitalizeFirstLetter(inputElement.value.trim());
@@ -672,9 +680,12 @@ function handleInput() {
 
     selectProjectFolder();
 
+    applyStylesBasedOnWidth();
+
     isInputVisible = false; // Reset the flag
   }
   // Reattach event listeners after removing the warning
+  inputElement.addEventListener('focusout', handleInput);
   inputElement.addEventListener('keydown', handleKeydown);
 }
 
