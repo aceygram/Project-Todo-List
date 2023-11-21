@@ -695,7 +695,7 @@ function handleInput() {
         }
       }, 3000);
     }
-  } else {
+  } else if (projectName.length >= 1) {
     // Reset the warningDisplayed flag when the input is valid
     if (warningDisplayed) {
       const warningMessage = sideMenu.querySelector('.warning');
@@ -719,6 +719,25 @@ function handleInput() {
     applyStylesBasedOnWidth();
 
     isInputVisible = false; // Reset the flag
+  } else {
+    if (!warningDisplayed) {
+      const p = document.createElement('p');
+      p.textContent = "Your project name should not be more than 1 character!";
+      p.classList.add('warning');
+      sideMenu.appendChild(p);
+      warningDisplayed = true; // Set the flag to true
+
+      // Delay the removal of the warning message after 5 seconds
+      setTimeout(() => {
+        if (warningDisplayed) {
+          const warningMessage = sideMenu.querySelector('.warning');
+          if (warningMessage) {
+            warningMessage.remove();
+          }
+          warningDisplayed = false;
+        }
+      }, 3000);
+    }
   }
   // Reattach event listeners after removing the warning
   inputElement.addEventListener('focusout', handleInput);
