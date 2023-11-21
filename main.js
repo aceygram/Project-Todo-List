@@ -423,7 +423,6 @@ addProjectButton.addEventListener('click', () => {
   if (!isInputVisible) {
     // Create an input element to collect the project name
     inputElement = document.createElement('input');
-    inputElement.inputmode="none"
     inputElement.type = 'text';
     inputElement.placeholder = 'Enter project name';
     inputElement.classList.add('project-input');
