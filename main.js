@@ -429,6 +429,10 @@ addProjectButton.addEventListener('click', () => {
 
     
     // Add an event listener to the input element for both 'focusout' and 'keydown' events
+    inputElement.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+    });
+
     inputElement.addEventListener('keydown', handleKeydown);
 
     // Append the input element to the middle menu
