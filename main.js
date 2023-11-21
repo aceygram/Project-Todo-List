@@ -454,7 +454,6 @@ addProjectButton.addEventListener('click', () => {
 
     // Append the input element to the middle menu
     sideMenu.appendChild(inputElement);
-    inputElement.focus();
     isInputVisible = true; // Set the flag to indicate that the input is visibley
   }
 });
