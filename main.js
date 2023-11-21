@@ -5,6 +5,37 @@ const todoCanvas = document.querySelector('.todo-canvas');
 const todoTop = document.querySelector('.todo-top');
 const addTodo = document.getElementById('addTodo');
 
+let initialViewportHeight = window.innerHeight;
+
+window.addEventListener('resize', function() {
+  const currentViewportHeight = window.innerHeight;
+  const heightDifference = initialViewportHeight - currentViewportHeight;
+
+  if (Math.abs(heightDifference) > 100) {
+    // Assume keyboard appearance, don't execute your logic
+    return;
+  }
+
+  initialViewportHeight = currentViewportHeight;
+
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(function() {
+    applyStylesBasedOnWidth();
+  }, 250);
+});
+
+// Add focus event listener to all input fields
+const inputFields = document.querySelectorAll('input');
+inputFields.forEach(input => {
+  input.addEventListener('focus', function() {
+    // Input focused, skip your logic
+  });
+  input.addEventListener('blur', function() {
+    // Input blurred, apply styles based on width
+    applyStylesBasedOnWidth();
+  });
+});
+
 // Function to check the viewport width and apply styles
 function applyStylesBasedOnWidth() {
   const viewportWidth = window.innerWidth;
@@ -661,9 +692,6 @@ function handleInput() {
           }
           warningDisplayed = false;
         }
-
-        // Reattach event listeners after showing the warning
-        attachEventListeners();
       }, 3000);
     }
   } else {
