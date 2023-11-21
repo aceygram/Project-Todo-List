@@ -423,12 +423,17 @@ addProjectButton.addEventListener('click', () => {
   if (!isInputVisible) {
     // Create an input element to collect the project name
     inputElement = document.createElement('input');
+    inputElement.inputmode="none"
     inputElement.type = 'text';
     inputElement.placeholder = 'Enter project name';
     inputElement.classList.add('project-input');
 
     
     // Add an event listener to the input element for both 'focusout' and 'keydown' events
+    inputElement.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+    });
+
     inputElement.addEventListener('keydown', handleKeydown);
 
     // Append the input element to the middle menu
