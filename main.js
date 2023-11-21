@@ -665,8 +665,6 @@ function handleInput() {
 
     selectProjectFolder();
 
-    applyStylesBasedOnWidth();
-
     isInputVisible = false; // Reset the flag
   }
   // Reattach event listeners after removing the warning
